@@ -19,9 +19,10 @@ routes.post('/login', authentication.auth)
 
 routes.post('/properties', authMiddleware, properties.create);
 routes.put('/properties', authMiddleware, properties.update);
-routes.delete('/properties', authMiddleware, properties.delete);
+routes.post('/properties/delete', authMiddleware, properties.delete);
 
 routes.get('/properties', authMiddleware, properties.get);
+routes.get('/properties/search', authMiddleware, properties.search);
 
 // export routes to app.ts
 export { routes }

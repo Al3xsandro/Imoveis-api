@@ -13,11 +13,40 @@ interface propertyData {
     avaliable: boolean;
 }
 
+type userData = {
+    user_id: string;
+    id: string;
+}
+
 class propertiesService {
     private propertiesRepository: Repository<Property>
     constructor(){
         this.propertiesRepository = getCustomRepository(PropertiesRepository);
     }
+
+    // Show properties
+    async getAllProperties(){
+        const property = await this.propertiesRepository.find()
+
+        delete property[0].user_id
+
+        return property
+    }
+
+    async searchProperty(cep){
+
+        const property = await this.propertiesRepository.find({
+            where: { cep }
+        })
+
+        if(!property){
+            return 'An error was occurred'
+        }
+
+        return property
+    }
+
+    // Config properties
 
     async create({
         user_id,
@@ -34,7 +63,7 @@ class propertiesService {
         })
 
         if(propertyExists){
-            return 'This immobile was exists'
+            return 'This property already exists'
         }
 
         const property = this.propertiesRepository.create({
@@ -52,12 +81,29 @@ class propertiesService {
         return property
     }
 
-    async getProperties({ user_id, cep }){
-        const property = await this.propertiesRepository.find({
-            where: { user_id }
+    async updateProperty(){
+        return   
+    }
+
+    async deleteProperty({ id, user_id }:userData){
+        const idExists = this.propertiesRepository.findOne({
+            id,
+            user_id
+        });
+
+        if(!idExists){
+            return 'An error has occurred'
+        }
+
+        const deleteProperty = await this.propertiesRepository.delete({
+            id
         })
 
-        return property
+        if(!deleteProperty.affected){
+            return 'An error has occurred'
+        }
+
+        return 'deleted with success'
     }
 }
 

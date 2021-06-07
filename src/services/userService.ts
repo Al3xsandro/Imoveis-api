@@ -22,7 +22,7 @@ class userService {
 
         // Caso o usuário existir.
         if(userExists){
-            return 'This user was exists';
+            return 'This user already exists';
         }
         
         // Caso não existir.
