@@ -13,6 +13,11 @@
       
 ---
 - Rotas 🚀
+          
+       - Lembre-se de utilizar o token recebido após efetuar o login nos headers!
+   
+       - Exemplo: "Authorization": "jwt_token".
+    
     <h5> Autenticação :zap: </h5>
          
          Cadastro de usuário: /register
@@ -35,7 +40,8 @@
     
    <h5> Gerenciar imóveis :zap: </h5>
    
-        Adicionar um imóvel: 
+        Adicionar um imóvel:
+        rota: /properties/create
         
         -> Método POST
         
@@ -84,11 +90,6 @@
           }
 
    <h5> Buscar imóveis :zap: </h5>
-   
-   -> Lembre-se de utilizar o token recebido após efetuar o login nos headers!
-   
-   Exemplo: "Authorization": "jwt_token".
-   
    
         Buscar por um imóveis próximos: 
         -> http://localhost:8000/properties/search?cep=00000-00
