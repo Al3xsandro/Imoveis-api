@@ -11,6 +11,7 @@
       uuid v4
       Typescript
       
+---
 - Rotas 🚀
     <h5> Autenticação :zap: </h5>
          
@@ -35,7 +36,9 @@
    <h5> Gerenciar imóveis :zap: </h5>
    
         Adicionar um imóvel: 
+        
         -> Método POST
+        
         body: {
             "cep": "00000-00"
             "number": "0000",
@@ -46,7 +49,9 @@
         }
         
         Remover um imóvel:
+        
         ⚠️ o id pode ser obetido ao criar um imóvel
+        
         -> Método POST
         body: {
             "id": "_aqui_vai_o_id_do_imóvel"
@@ -54,29 +59,19 @@
    
    <h5>Atualizar um imóvel :hammer_and_wrench:</h5>
      
-     -> rota: /properties/update 
-     -> Método POST
-     -> ⚠️ Você pode enviar a requisição somente com o id e valor que quer alterar!
+        -> rota: /properties/update 
+          
+          -> Método POST
+          -> ⚠️ Você pode enviar a requisição somente com o id e valor que quer alterar!
 
-     Exemplo:
+        Exemplo:
 
           body {
                "id": "id_do_imóvel",
                "avaliable": true
           }
-     Ou você pode alterar tudo:
-
-          body {
-               "id": "id_do_imóvel",
-               "cep": "00000-01",
-               "number": "0000",
-               "complement": "00",
-               "value": "16000",
-               "bedrooms": "3",
-               "avaliable": true
-          }
-
-     Valores permitidos: 
+          
+        Valores permitidos: 
 
           body {
                id -> id do imóvel
@@ -89,6 +84,7 @@
           }
 
    <h5> Buscar imóveis :zap: </h5>
+   
    -> Lembre-se de utilizar o token recebido após efetuar o login nos headers!
    
    Exemplo: "Authorization": "jwt_token".
