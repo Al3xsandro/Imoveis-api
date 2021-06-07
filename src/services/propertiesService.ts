@@ -120,7 +120,7 @@ class propertiesService {
             return 'An error has occurred'
         }
 
-        return 'deleted with success'
+        return 'updated with success'
     }
 
     async deleteProperty({ id, user_id }:userData){
