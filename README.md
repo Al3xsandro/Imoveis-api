@@ -59,6 +59,7 @@
         ⚠️ o id pode ser obetido ao criar um imóvel
         
         -> Método POST
+        
         body: {
             "id": "_aqui_vai_o_id_do_imóvel"
         }
