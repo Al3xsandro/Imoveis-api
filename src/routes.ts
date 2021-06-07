@@ -18,7 +18,7 @@ routes.post('/register', user.create)
 routes.post('/login', authentication.auth)
 
 routes.post('/properties', authMiddleware, properties.create);
-routes.put('/properties', authMiddleware, properties.update);
+routes.post('/properties/update', authMiddleware, properties.update);
 routes.post('/properties/delete', authMiddleware, properties.delete);
 
 routes.get('/properties', authMiddleware, properties.get);

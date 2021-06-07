@@ -2,6 +2,7 @@ import { Request, Response} from 'express';
 import { propertiesService } from '../services/propertiesService';
 
 interface propertiesData {
+    id: string;
     user_id: string;
     cep: string;
     number: string;
@@ -70,7 +71,36 @@ class propertiesController{
         return res.json(resp)
     }
     async update(req: Request, res: Response){
-        return
+        const {
+            id,
+            cep,
+            number,
+            complement,
+            value,
+            bedrooms,
+            avaliable
+        }:propertiesData = req.body;
+
+        if(!id){
+            return res.status(403).send('You must write the id!')
+        }
+
+        const user_id = res.locals.user
+
+        const properties = new propertiesService();
+
+        const resp = await properties.updateProperty({
+            id,
+            user_id,
+            cep,
+            number,
+            complement,
+            value,
+            bedrooms,
+            avaliable
+        });
+
+        return res.json(resp)
     }
     async delete(req: Request, res: Response){
         const { id } = req.body;

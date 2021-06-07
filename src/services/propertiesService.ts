@@ -4,6 +4,7 @@ import { Property } from '../entities/Properties';
 import { PropertiesRepository } from '../repositories/propertiesRepository';
 
 interface propertyData {
+    id?: string;
     user_id: string;
     cep: string;
     number: string;
@@ -81,8 +82,45 @@ class propertiesService {
         return property
     }
 
-    async updateProperty(){
-        return   
+    async updateProperty({
+        id,
+        user_id,
+        cep,
+        number,
+        complement,
+        value,
+        bedrooms,
+        avaliable
+    }:propertyData){
+        const propertyExists = await this.propertiesRepository.findOne({
+            id,
+            user_id
+        })
+
+        if(!propertyExists){
+            return 'This property not exists'
+        }
+
+        const properties = await this.propertiesRepository.find({
+            where: { id, user_id }
+        })
+
+        const update = await this.propertiesRepository.update(
+            id, {
+                cep: !cep ? properties[0].cep : cep,
+                number: !number ? properties[0].number : number,
+                complement: !complement ? properties[0].complement : complement,
+                value: !value ? properties[0].value : value,
+                bedrooms: !bedrooms ? properties[0].bedrooms : bedrooms,
+                avaliable: !avaliable ? properties[0].avaliable : avaliable
+            }
+        )
+
+        if(!update.affected){
+            return 'An error has occurred'
+        }
+
+        return 'deleted with success'
     }
 
     async deleteProperty({ id, user_id }:userData){

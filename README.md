@@ -52,6 +52,42 @@
             "id": "_aqui_vai_o_id_do_imóvel"
         }
    
+   <h5>Atualizar um imóvel :hammer_and_wrench:</h5>
+     
+     -> rota: /properties/update 
+     -> Método POST
+     -> ⚠️ Você pode enviar a requisição somente com o id e valor que quer alterar!
+
+     Exemplo:
+
+          body {
+               "id": "id_do_imóvel",
+               "avaliable": true
+          }
+     Ou você pode alterar tudo:
+
+          body {
+               "id": "id_do_imóvel",
+               "cep": "00000-01",
+               "number": "0000",
+               "complement": "00",
+               "value": "16000",
+               "bedrooms": "3",
+               "avaliable": true
+          }
+
+     Valores permitidos: 
+
+          body {
+               id -> id do imóvel
+               cep -> cep do imóvel
+               number -> número do imóvel
+               complement -> complemento do imóvel
+               value -> valor do imóvel
+               bedrooms -> quantidade de quartos
+               avaliable -> true/false | se o imóvel está disponível ou não
+          }
+
    <h5> Buscar imóveis :zap: </h5>
    -> Lembre-se de utilizar o token recebido após efetuar o login nos headers!
    
