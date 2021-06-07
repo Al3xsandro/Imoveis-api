@@ -36,6 +36,8 @@ class userService {
 
         await this.userRepository.save(user)
 
+        delete user.password
+
         return user;
     }
 }
