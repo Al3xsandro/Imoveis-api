@@ -55,6 +55,7 @@
         }
         
         Remover um imóvel:
+        Rota: /properties/remove
         
         ⚠️ o id pode ser obetido ao criar um imóvel
         
