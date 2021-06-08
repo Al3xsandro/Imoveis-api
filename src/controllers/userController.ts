@@ -10,22 +10,26 @@ interface User {
 
 class userController {
     async create(req: Request, res: Response): Promise<Response> {
-        const { 
-            name,
-            cpf, 
-            email, 
-            password 
-        }: User = req.body;
-
-        if (!name.trim() || !cpf.trim() || !email.trim() || !password){
-            return res.status(400).send('You should all fields!')
+        try {
+            const { 
+                name,
+                cpf, 
+                email, 
+                password 
+            }: User = req.body;
+    
+            if (!name.trim() || !cpf.trim() || !email.trim() || !password){
+                return res.status(400).send('You should all fields!')
+            }
+            
+            const user = new userService();
+    
+            const resp = await user.create({ name, cpf, email, password });
+    
+            return res.json(resp)
+        } catch (err) {
+            return res.status(400).send({data: err.message})
         }
-        
-        const user = new userService();
-
-        const resp = await user.create({ name, cpf, email, password });
-
-        return res.json(resp)
     }
 }
 

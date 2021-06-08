@@ -25,13 +25,13 @@ class authService {
         })
 
         if(!user){
-            return 'Invalid user or password'
+            throw new Error('Invalid usser or password')
         }
 
         const isValidPassword = await bcrypt.compare(password, user.password)
 
         if(!isValidPassword){
-            return 'Invalid user or password'
+            throw new Error('invalid user or password') 
         }
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, { expiresIn: 8000});

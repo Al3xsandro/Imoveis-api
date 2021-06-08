@@ -8,20 +8,24 @@ interface User {
 
 class authController {
     async auth(req: Request, res: Response): Promise<Response> {
-        const { 
-            email, 
-            password 
-        }: User = req.body;
+        try {
+            const { 
+                email, 
+                password 
+            }: User = req.body;
+    
+            if (!email.trim() || !password){
+                return res.status(400).send('You should all fields!')
+            }
+            
+            const user = new authService();
 
-        if (!email.trim() || !password){
-            return res.status(400).send('You should all fields!')
+            const resp = await user.auth(email, password);
+
+            return res.json(resp)
+        } catch(err) {
+            return res.status(400).send({data: err.message})
         }
-        
-        const user = new authService();
-
-        const resp = await user.auth(email, password);
-
-        return res.json(resp)
     }
 }
 
