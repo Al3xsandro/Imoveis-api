@@ -35,13 +35,16 @@ class propertiesService {
     }
 
     async searchProperty(cep){
-
         const property = await this.propertiesRepository.find({
             where: { cep }
         })
 
         if(!property){
-            return 'An error was occurred'
+            throw new Error('An error was occurred')
+        }
+
+        if(property.length <= 0){
+            throw new Error('This cep not exists')
         }
 
         return property
@@ -64,7 +67,7 @@ class propertiesService {
         })
 
         if(propertyExists){
-            return 'This property already exists'
+            throw new Error('This property already exists')
         }
 
         const property = this.propertiesRepository.create({
@@ -98,12 +101,16 @@ class propertiesService {
         })
 
         if(!propertyExists){
-            return 'This property not exists'
+            throw new Error('This property not exists')
         }
 
         const properties = await this.propertiesRepository.find({
             where: { id, user_id }
         })
+
+        if(!properties){
+            throw new Error('Invalid id')
+        }
 
         const update = await this.propertiesRepository.update(
             id, {
@@ -117,7 +124,7 @@ class propertiesService {
         )
 
         if(!update.affected){
-            return 'An error has occurred'
+            throw new Error('An error has occurred')
         }
 
         return 'updated with success'
@@ -130,7 +137,7 @@ class propertiesService {
         });
 
         if(!idExists){
-            return 'An error has occurred'
+            throw new Error('This id not exists')
         }
 
         const deleteProperty = await this.propertiesRepository.delete({
@@ -138,7 +145,7 @@ class propertiesService {
         })
 
         if(!deleteProperty.affected){
-            return 'An error has occurred'
+            throw new Error('An error has occurred')
         }
 
         return 'deleted with success'

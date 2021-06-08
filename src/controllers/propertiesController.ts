@@ -23,99 +23,115 @@ class propertiesController{
     }
 
     async search(req: Request, res: Response){
-        // cep param /search?cep=
-        const cep = req.query;
+        try {
+            // cep param /search?cep=
+            const cep = req.query;
 
-        if(!cep){
-            res.send(403).send('An error has occurred')
+            if(!cep){
+                res.send(403).send('An error has occurred')
+            }
+
+            const properties = new propertiesService();
+
+            const resp = await properties.searchProperty(cep.cep);
+
+            return res.json(resp)
+        } catch(err){
+            return res.status(400).send({ data: err.message })
         }
-
-        const properties = new propertiesService();
-
-        const resp = await properties.searchProperty(cep.cep);
-
-        return res.json(resp)
     }
 
     // Config properties
 
     async create(req: Request, res: Response){
-        const { 
-            cep,
-            number,
-            complement,
-            value,
-            bedrooms,
-            avaliable
-        }:propertiesData = req.body;
-
-        if(!cep.trim() || !number.trim() || !complement.trim() || !value.trim() || !bedrooms.trim() || !avaliable){
-            return res.status(403).send('You should all fields!')
+        try {
+            const { 
+                cep,
+                number,
+                complement,
+                value,
+                bedrooms,
+                avaliable
+            }:propertiesData = req.body;
+    
+            if(!cep.trim() || !number.trim() || !complement.trim() || !value.trim() || !bedrooms.trim() || !avaliable){
+                return res.status(403).send('You should all fields!')
+            }
+            
+            // auth middleware
+            const user_id = res.locals.user
+    
+            const properties = new propertiesService(); 
+            
+            const resp = await properties.create({
+                user_id,
+                cep,
+                number,
+                complement,
+                value,
+                bedrooms,
+                avaliable
+            })
+    
+            return res.json(resp)
+        } catch(err){
+            return res.status(400).send({ data: err.message });
         }
-        
-        // auth middleware
-        const user_id = res.locals.user
-
-        const properties = new propertiesService(); 
-        
-        const resp = await properties.create({
-            user_id,
-            cep,
-            number,
-            complement,
-            value,
-            bedrooms,
-            avaliable
-        })
-
-        return res.json(resp)
     }
     async update(req: Request, res: Response){
-        const {
-            id,
-            cep,
-            number,
-            complement,
-            value,
-            bedrooms,
-            avaliable
-        }:propertiesData = req.body;
-
-        if(!id){
-            return res.status(403).send('You must write the id!')
+        try {
+            const {
+                id,
+                cep,
+                number,
+                complement,
+                value,
+                bedrooms,
+                avaliable
+            }:propertiesData = req.body;
+    
+            if(!id){
+                return res.status(403).send('You must write the id!')
+            }
+    
+            const user_id = res.locals.user
+    
+            const properties = new propertiesService();
+    
+            const resp = await properties.updateProperty({
+                id,
+                user_id,
+                cep,
+                number,
+                complement,
+                value,
+                bedrooms,
+                avaliable
+            });
+    
+            return res.json(resp)
+        } catch (err) {
+            return res.status(400).send({ data: err.message })
         }
-
-        const user_id = res.locals.user
-
-        const properties = new propertiesService();
-
-        const resp = await properties.updateProperty({
-            id,
-            user_id,
-            cep,
-            number,
-            complement,
-            value,
-            bedrooms,
-            avaliable
-        });
-
-        return res.json(resp)
     }
     async delete(req: Request, res: Response){
-        const { id } = req.body;
+        try {
+            const { id } = req.body;
 
-        if(!id){
-            return res.status(403).send('You should all fields')
+            if(!id){
+                return res.status(403).send('You should all fields')
+            }
+
+            const user_id = res.locals.user
+            
+            const properties = new propertiesService();
+
+            const resp = await properties.deleteProperty({ id, user_id })
+
+            return res.json(resp)
+        } catch(err) {
+            return res.status(400).send({ data: err.message })
         }
-
-        const user_id = res.locals.user
-        
-        const properties = new propertiesService();
-
-        const resp = await properties.deleteProperty({ id, user_id })
-
-        return res.json(resp)
     }
 }   
 
