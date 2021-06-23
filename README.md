@@ -7,7 +7,6 @@
       Postgres
       Jwt
       Bcryptjs
-      Arquitetura solid
       uuid v4
       Typescript
       
