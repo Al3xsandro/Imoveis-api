@@ -104,7 +104,7 @@
          1- Em seu terminal digite: # -> git clone https://github.com/Al3xsandro/imoveis-api.git
          Logo após verifique se você tem a última versão estável do nodejs em seu dispositivo.
          
-         2- Após os procedimentos, entre na pasta do projeto e use seu gerenciado de pacotes, que pode ser tanto yarn ou npm
+         2- Após os procedimentos, entre na pasta do projeto e use seu gerenciador de pacotes, que pode ser tanto yarn ou npm
          # -> Digite: yarn ou npm
          
          3- Depois de efetuar a instalação das dependências contidas no package.json, configure o arquivo env.example que está na raiz do projeto.
