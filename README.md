@@ -26,7 +26,7 @@
                 "name": "Exemplo",
                 "cpf": "000.000.000-00",
                 "email": "exemplo@gmail.com"
-                "password": "hardpassword"
+                "password": "senha"
          }
          
          Login de usuário: /login
@@ -34,7 +34,7 @@
          -> Método POST
          body: {
               "email": "exemplo@gmail.com",
-              "password": "hardpassword
+              "password": "senha"
          }
     
    <h5> Gerenciar imóveis :zap: </h5>
@@ -56,7 +56,7 @@
         Remover um imóvel:
         Rota: /properties/remove
         
-        ⚠️ o id pode ser obetido ao criar um imóvel
+        ⚠️ o id pode ser obtido ao criar um imóvel
         
         -> Método POST
         
