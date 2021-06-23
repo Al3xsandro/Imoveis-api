@@ -107,7 +107,7 @@
          2- Após os procedimentos, entre na pasta do projeto e use seu gerenciado de pacotes, que pode ser tanto yarn ou npm
          # -> Digite: yarn ou npm
          
-         3- Depois de efetuar a instalação das dependências contidas no package.json, configura o arquivo env.example que está na raiz do projeto.
+         3- Depois de efetuar a instalação das dependências contidas no package.json, configure o arquivo env.example que está na raiz do projeto.
          Dica de hospedagem postgres: https://www.elephantsql.com/
 
          4- Em seu terminal, após configurar o env.example, digite: yarn typeorm migration:run
