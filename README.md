@@ -112,4 +112,4 @@
 
          4- Em seu terminal, após configurar o env.example, digite: yarn typeorm migration:run
 
-         5- Após isso você já pode iniciar o projeto, com o comando # -> yarn start ou npm start
+         5- Após isso você já pode iniciar o projeto com o comando # -> yarn start ou npm start
